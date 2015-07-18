@@ -1,0 +1,49 @@
+apply plugin:'java'
+apply plugin:'jacoco'
+
+//Se define el encodint que se compila
+
+[compileJava, compileTestJava]*.options*.encoding='ISO-8859-1'
+
+//Compatibilidad de Java 1.7
+sourceCompatibility=1.7
+targetCompatibility=1.7
+
+
+//Se establece la ubicacion de los fuentes
+
+sourceSets{
+	main{
+		java{
+			srcDir 'src'
+		}
+	}
+	test{
+		java{
+			srcDir 'test'
+		}
+	}
+}
+//Se hace el llamado al repositorio central de dependencias
+repositories{
+	mavenCentral()
+}
+
+//Se configuran las dependencias
+dependencies{
+
+	//Se agrega la dependencia de jUnit
+	testCompile 'junit:junit:4.11'
+	
+
+}
+//Se configura jacoco
+
+test{
+	jacoco{
+		toolVersion='0.7.1.201405082137'
+		destinationFile= file("build/jacoco/jacoco.exe")
+		append=true
+	}
+}
+
